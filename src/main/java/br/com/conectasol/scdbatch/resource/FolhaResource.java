@@ -22,7 +22,9 @@ public class FolhaResource {
 	public String teste() {
 
 		try {
+			long start = System.currentTimeMillis();
 			jobLauncher.run(job, new JobParameters());
+			long elapsed = System.currentTimeMillis() - start;
 //			MIndex mIndex = Folha.class.getAnnotation(MIndex.class);
 //			String nome = "";
 //			if (mIndex != null) {
@@ -39,7 +41,8 @@ public class FolhaResource {
 //			httppost.setEntity(entity);
 //			HttpResponse response = httpclient.execute(httppost);
 
-			return "ok - ";
+			System.out.println(elapsed);
+			return "ok - "+elapsed;
 		} catch (Exception e) {
 			return e.getMessage();
 		}
