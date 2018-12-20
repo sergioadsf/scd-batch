@@ -23,6 +23,7 @@
 		<elasticsearch.version>6.3.1</elasticsearch.version>
 		<swagger.version>2.8.0</swagger.version>
 		<asynchttpclient.version>2.5.2</asynchttpclient.version>
+		<opencsv.version>4.2</opencsv.version>
 	</properties>
 
 	<dependencies>
@@ -105,6 +106,12 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>${opencsv.version}</version>
 		</dependency>
 	</dependencies>
 

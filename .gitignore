@@ -25,4 +25,4 @@
 /.nb-gradle/
 
 
-src/main/resources/input
+*.csv

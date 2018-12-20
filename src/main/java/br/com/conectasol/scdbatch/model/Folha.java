@@ -7,6 +7,7 @@ import br.com.conctasol.annotation.MIndex;
 @MIndex(name = "folhapagamento")
 public class Folha {
 
+	
 	@MField(name = "ano_mes", type = "text")
 	private String anoMes;
 
