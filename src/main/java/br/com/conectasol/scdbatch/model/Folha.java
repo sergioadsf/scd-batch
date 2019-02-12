@@ -3,12 +3,14 @@ package br.com.conectasol.scdbatch.model;
 import br.com.conctasol.annotation.Keyword;
 import br.com.conctasol.annotation.MField;
 import br.com.conctasol.annotation.MIndex;
+import br.com.conctasol.annotation.MSplitField;
 
 @MIndex(name = "folhapagamento")
 public class Folha {
 
-	
-	@MField(name = "ano_mes", type = "text")
+//	@MField(name = "ano_mes", type = "text")
+	@MSplitField({ @MField(name = "ano", type = "keyword", start = 0, size = 4),
+			@MField(name = "mes", type = "keyword", start = 4, size = 2), @MField(name = "ano_mes", type = "keyword") })
 	private String anoMes;
 
 	@MField(name = "codigo_orgao", type = "integer", index = false)
@@ -206,5 +208,4 @@ public class Folha {
 //				+ ", valorDemaisDescontos=" + valorDemaisDescontos + ", valorFerias=" + valorFerias + ", valorLiquido="
 //				+ valorLiquido + ", valorProvento=" + valorProvento + ", valorproventomes=" + valorproventomes + "]";
 //	}
-
 }
