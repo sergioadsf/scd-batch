@@ -44,14 +44,11 @@ public class FolhaConfiguration {
 	private Resource[] inputResourcesV2;
 
 	@Autowired
-	private JobBuilderFactory jobBuilderFactory;
-
-	@Autowired
 	private StepBuilderFactory stepBuilderFactory;
 
 	@Bean
 	public MultiResourceItemReader<Folha> multiResourceItemReaderV1() {
-		MultiResourceItemReader<Folha> resourceItemReader = new MultiResourceItemReader<Folha>();
+		MultiResourceItemReader<Folha> resourceItemReader = new MultiResourceItemReader<>();
 		resourceItemReader.setResources(inputResourcesV1);
 		resourceItemReader.setDelegate(readerV1());
 		return resourceItemReader;
@@ -59,7 +56,7 @@ public class FolhaConfiguration {
 
 	@Bean
 	public MultiResourceItemReader<Folha> multiResourceItemReaderV2() {
-		MultiResourceItemReader<Folha> resourceItemReader = new MultiResourceItemReader<Folha>();
+		MultiResourceItemReader<Folha> resourceItemReader = new MultiResourceItemReader<>();
 		resourceItemReader.setResources(inputResourcesV2);
 		resourceItemReader.setDelegate(readerV2());
 		return resourceItemReader;
@@ -67,29 +64,24 @@ public class FolhaConfiguration {
 
 	@Bean
 	public FlatFileItemReader<Folha> readerV1() {
+		BeanWrapperFieldSetMapper<Folha> bean = new BeanWrapperFieldSetMapper<>();
+		bean.setTargetType(Folha.class);
 		return new FlatFileItemReaderBuilder<Folha>()
 				.name("folhapagamento").linesToSkip(1).delimited()
 				.delimiter(DELIMITER)
 				.names(NAMES_V1)
-				.fieldSetMapper(new BeanWrapperFieldSetMapper<Folha>() {
-					{
-						setTargetType(Folha.class);
-					}
-				}).build();
+				.fieldSetMapper(bean).build();
 	}
 
 	@Bean
 	public FlatFileItemReader<Folha> readerV2() {
+		BeanWrapperFieldSetMapper<Folha> bean = new BeanWrapperFieldSetMapper<>();
 		return new FlatFileItemReaderBuilder<Folha>()
 				.name("folhapagamento")
 				.linesToSkip(1).delimited()
 				.delimiter(DELIMITER)
 				.names(NAMES_V2)
-				.fieldSetMapper(new BeanWrapperFieldSetMapper<Folha>() {
-					{
-						setTargetType(Folha.class);
-					}
-				}).build();
+				.fieldSetMapper(bean).build();
 	}
 
 	@Bean
@@ -125,7 +117,7 @@ public class FolhaConfiguration {
 	}
 
 	@Bean
-	public Job importUserJob(JobCompletionNotificationListener listener, Step stepV1, Step stepV2) {
+	public Job importUserJob(JobBuilderFactory jobBuilderFactory, JobCompletionNotificationListener listener, Step stepV1, Step stepV2) {
 		return jobBuilderFactory.get("importUserJob")
 				.incrementer(new RunIdIncrementer())
 				.listener(listener)

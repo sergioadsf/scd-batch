@@ -63,7 +63,6 @@
 			<version>${swagger.version}</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.elasticsearch</groupId>
 			<artifactId>elasticsearch</artifactId>
@@ -95,7 +94,6 @@
 			<version>${asynchttpclient.version}</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>br.com.conectasol</groupId>
 			<artifactId>elasticsearch-annotation</artifactId>
@@ -107,11 +105,24 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.opencsv</groupId>
 			<artifactId>opencsv</artifactId>
 			<version>${opencsv.version}</version>
+		</dependency>
+
+		<!-- LOGS -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>biz.paluch.logging</groupId>
+			<artifactId>logstash-gelf</artifactId>
+			<version>1.12.0</version>
 		</dependency>
 	</dependencies>
 

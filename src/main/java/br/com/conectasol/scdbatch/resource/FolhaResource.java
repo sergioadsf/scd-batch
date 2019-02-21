@@ -1,9 +1,8 @@
 package br.com.conectasol.scdbatch.resource;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
@@ -38,18 +37,18 @@ public class FolhaResource {
 			if (mIndex != null) {
 				nome = mIndex.name();
 			}
-			HttpClient httpclient = HttpClients.createDefault();
-			HttpPost httppost = new HttpPost("http://localhost:8083/indice/" + nome);
-			httppost.setHeader("Accept", "application/json");
+			try (CloseableHttpClient httpclient = HttpClients.createDefault();) {
+				HttpPost httppost = new HttpPost("http://localhost:8083/indice/" + nome);
+				httppost.setHeader("Accept", "application/json");
 
-			String json = new IndiceUtil().convertJson(Folha.class);
+				String json = new IndiceUtil().convertJson(Folha.class);
 
-			StringEntity entity = new StringEntity(json, "UTF8");
-			entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-			httppost.setEntity(entity);
-			HttpResponse response = httpclient.execute(httppost);
-
-			return json;
+				StringEntity entity = new StringEntity(json, "UTF8");
+				entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+				httppost.setEntity(entity);
+				httpclient.execute(httppost);
+				return json;
+			}
 		} catch (Exception e) {
 			return e.getMessage();
 		}

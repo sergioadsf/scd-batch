@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.UUID;
 import java.util.stream.Stream;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import br.com.conctasol.annotation.MField;
@@ -51,7 +52,7 @@ public class FolhaService {
 
 			return jsonB.toString();
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getRootLogger().error(e.getMessage(), e);
 		}
 
 		throw new IllegalAccessError();
