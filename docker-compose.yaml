@@ -1,7 +1,8 @@
 version: "3.0"
 services: 
   scd-batch:
-    image: sergioadsf/scd-batch:1.2
+    # image: sergioadsf/scd-batch:1.2
+    build: .
     container_name: scd-batch
     ports: 
       - "8082:8082"
@@ -9,6 +10,9 @@ services:
       - scd-elastic
     links: 
       - scd-elastic
+    environment: 
+      - SCD_ELASTIC_URL=scd-elastic
+      - SCD_ELASTIC_PORT=8083
 
   scd-elastic:
     image: sergioadsf/scd-elastic:1.1

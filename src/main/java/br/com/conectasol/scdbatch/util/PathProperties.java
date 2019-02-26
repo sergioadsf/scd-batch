@@ -1,8 +1,8 @@
 package br.com.conectasol.scdbatch.util;
 
+import org.apache.log4j.Logger;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @ConfigurationProperties(prefix = "scd")
@@ -16,6 +16,7 @@ public class PathProperties {
 	}
 
 	public void setPort(String port) {
+		Logger.getRootLogger().info("Porta: "+port);
 		this.port = port;
 	}
 
@@ -24,6 +25,7 @@ public class PathProperties {
 	}
 
 	public void setUrl(String url) {
+		Logger.getRootLogger().info("Url: "+url);
 		this.url = url;
 	}
 
