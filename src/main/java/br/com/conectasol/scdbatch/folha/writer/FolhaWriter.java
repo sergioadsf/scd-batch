@@ -10,11 +10,13 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 
 import br.com.conctasol.annotation.MIndex;
 import br.com.conectasol.scdbatch.model.Folha;
 import br.com.conectasol.scdbatch.util.PathProperties;
 
+@Configuration
 public class FolhaWriter implements ItemWriter<String> {
 	
 	@Autowired

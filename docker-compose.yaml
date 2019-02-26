@@ -8,21 +8,24 @@ services:
       - "8082:8082"
     depends_on: 
       - scd-elastic
-    links: 
-      - scd-elastic
+    # links: 
+    #   - scd-elastic
     environment: 
       - SCD_ELASTIC_URL=scd-elastic
       - SCD_ELASTIC_PORT=8083
 
   scd-elastic:
-    image: sergioadsf/scd-elastic:1.1
+    image: sergioadsf/scd-elastic:1.2
     container_name: scd-elastic
     ports: 
       - "8083:8083"
     depends_on: 
       - elasticsearch
-    links: 
-      - elasticsearch
+    environment: 
+      - SCD_ELASTICSEARCH_URL=elasticsearch
+      - SCD_ELASTICSEARCH_PORT=9200
+    # links: 
+    #   - elasticsearch
     # networks:
     #   - scd-network
 
@@ -38,6 +41,13 @@ services:
     #   - scd-network
     environment:
       - XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED=false
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
   
   kibana:
     image: docker.elastic.co/kibana/kibana:6.6.1
@@ -54,8 +64,8 @@ services:
       - XPACK_SECURITY_ENABLED=false
     depends_on: 
       - elasticsearch
-    links: 
-      - elasticsearch
+  #   links: 
+  #     - elasticsearch
 
 # networks: 
 #   scd-network:
