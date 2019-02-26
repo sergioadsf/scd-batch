@@ -9,11 +9,16 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.conctasol.annotation.MIndex;
 import br.com.conectasol.scdbatch.model.Folha;
+import br.com.conectasol.scdbatch.util.PathProperties;
 
 public class FolhaWriter implements ItemWriter<String> {
+	
+	@Autowired
+	private PathProperties pathProperties;
 
 	@Override
 	public void write(List<? extends String> items) throws Exception {
@@ -26,7 +31,7 @@ public class FolhaWriter implements ItemWriter<String> {
 		StringBuilder sb = new StringBuilder();
 
 		try (CloseableHttpClient httpclient = HttpClients.createDefault();) {
-			HttpPost httppost = new HttpPost("http://localhost:8083/documento/" + nome);
+			HttpPost httppost = new HttpPost(String.format("http://%s:%s/documento/%s", pathProperties.getUrl(), pathProperties.getPort(), nome) );;
 			httppost.setHeader("Accept", "application/json");
 
 			for (String item : items) {

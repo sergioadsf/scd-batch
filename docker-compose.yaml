@@ -36,8 +36,8 @@ services:
       - esdata1:/usr/share/elasticsearch/data
     # networks:
     #   - scd-network
-    # environment:
-    #   - XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED=false
+    environment:
+      - XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED=false
   
   kibana:
     image: docker.elastic.co/kibana/kibana:6.6.1
