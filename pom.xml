@@ -21,7 +21,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 
-		<elasticsearch.version>6.3.1</elasticsearch.version>
+		<elasticsearch.version>6.8.15</elasticsearch.version>
 		<swagger.version>2.8.0</swagger.version>
 		<asynchttpclient.version>2.5.2</asynchttpclient.version>
 		<opencsv.version>4.2</opencsv.version>
